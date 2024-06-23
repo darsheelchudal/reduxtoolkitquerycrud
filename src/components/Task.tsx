@@ -11,8 +11,6 @@ function Task() {
         <div className="">
           {isLoading && <span>Loading.....</span>}
           {isError && <span>Soemthing went wrong.....</span>}
-
-          {isLoading && <span>Loading.....</span>}
         </div>
         <div>
           <div className="button flex justify-around m-10 border-2 h-20 items-center rounded-xl bg-blue-200">

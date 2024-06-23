@@ -8,24 +8,24 @@ function Create() {
     taskType: "",
   });
   const navigate = useNavigate();
-  const { createTasks, isLoading, isError, isSuccess } =
-    useCreateTasksMutation();
+  const [createTasks, { isLoading, isError }] = useCreateTasksMutation();
 
   //handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTask((prevProps) => ({
-      ...prevProps,
-      [name]: value,
-    }));
-    console.log("Prev propss", prevProps);
+    setTask((prevProps) => {
+      console.log("Previous props:", prevProps);
+      return {
+        ...prevProps,
+        [name]: value,
+      };
+    });
   };
 
   //handle submit
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
     try {
+      e.preventDefault();
       const response = await createTasks(task);
       console.log("Task created", response.data);
       setTask({
@@ -39,6 +39,8 @@ function Create() {
   };
   return (
     <>
+      {isLoading && <span>Loading...</span>}
+      {isError && <span>Loading...</span>}
       <div className="create">
         <div className="heading">
           <h1 className="text-2xl font-semibold p-10 text-center bg-blue-200">
