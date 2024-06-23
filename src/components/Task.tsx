@@ -5,7 +5,7 @@ import {
 import { Link } from "react-router-dom";
 
 function Task() {
-  const { data: tasks, isError, isSuccess, isLoading } = useGetTasksQuery();
+  const { data: tasks, isError, isSuccess, isLoading } = useGetTasksQuery(2);
   const [deleteTasks] = useDeleteTasksMutation();
 
   console.log(tasks);
@@ -56,9 +56,12 @@ function Task() {
                   TYPE: {task?.taskType}
                 </div>
                 <div className="flex justify-between">
-                  <button className="bg-green-500 text-white w-16 rounded-lg shadow-2xl h-8">
-                    Edit
-                  </button>
+                  <Link to={`/edit/${task?.id}`}>
+                    <button className="bg-green-500 text-white w-16 rounded-lg shadow-2xl h-8">
+                      Edit
+                    </button>
+                  </Link>
+
                   <button
                     className="bg-red-500 text-white w-16 rounded-lg shadow-2xl h-8"
                     onClick={() => handleClick(task?.id)}
