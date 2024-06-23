@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { Task } from "../model/tasks.model";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { Task } from "../model/tasks.model";
 
-export const TaskApi = createApi({
-  reducerPath: "TaskApi",
+export const taskApi = createApi({
+  reducerPath: "taskApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://66777c1a145714a1bd74d7b3.mockapi.io/api/v1",
   }),
@@ -13,4 +13,5 @@ export const TaskApi = createApi({
   }),
 });
 
-export const { useGetTasksQuery } = TaskApi;
+// The generated hooks should be available here
+export const { useGetTasksQuery } = taskApi;
