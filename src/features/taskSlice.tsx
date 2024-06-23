@@ -20,4 +20,4 @@ export const taskApi = createApi({
   }),
 });
 
-export const { useGetTasksQuery } = taskApi;
+export const { useGetTasksQuery, useCreateTasksMutation } = taskApi;

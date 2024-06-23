@@ -1,16 +1,41 @@
 import { useState } from "react";
+import { useCreateTasksMutation } from "../features/taskSlice";
+import { useNavigate } from "react-router";
 
 function Create() {
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState({
+    taskName: "",
+    taskType: "",
+  });
+  const navigate = useNavigate();
+  const { createTasks, isLoading, isError, isSuccess } =
+    useCreateTasksMutation();
 
+  //handle change
   const handleChange = (e) => {
-    const value = e.target.value;
-    setTask(value);
-    console.log(value);
+    const { name, value } = e.target;
+    setTask((prevProps) => ({
+      ...prevProps,
+      [name]: value,
+    }));
+    console.log("Prev propss", prevProps);
   };
-  const handleSubmit = (e) => {
+
+  //handle submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Task", task);
+
+    try {
+      const response = await createTasks(task);
+      console.log("Task created", response.data);
+      setTask({
+        taskName: "",
+        taskType: "",
+      });
+      navigate("/");
+    } catch (err) {
+      console.log("Error", err);
+    }
   };
   return (
     <>
@@ -31,16 +56,18 @@ function Create() {
                   className="rounded-2 bg-slate-200 h-10 p-4 outline-none rounded-lg w-[400px]"
                   placeholder="Task Name ..."
                   onChange={handleChange}
+                  value={task.taskName}
                 />
               </div>
               <div className="form-item">
                 <input
                   type="text"
                   name="taskType"
-                  id="taskName"
+                  id="taskType"
                   className="rounded-2 bg-slate-200 h-10 p-4 outline-none rounded-lg w-[400px]"
                   placeholder="Task Type ..."
                   onChange={handleChange}
+                  value={task.taskType}
                 />
               </div>
               <div className="flex justify-center">
