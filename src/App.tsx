@@ -1,11 +1,9 @@
-import { useGetTasksQuery } from "./features/taskSlice";
+import Task from "./components/Task";
 
 function App() {
-  const { data } = useGetTasksQuery();
-  console.log(data);
   return (
     <>
-      <div>App</div>
+      <Task />
     </>
   );
 }
