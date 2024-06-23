@@ -19,7 +19,7 @@ export const taskApi = createApi({
         } else {
           return response;
         }
-      },  
+      },
     }),
     getSingleTask: builder.query<Task, string>({
       query: (id) => ({
